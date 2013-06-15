@@ -38,7 +38,7 @@ enyo.kind({
     this.tokens.push(inEvent.originator);
   },
   go: function() {
-    this.$.mylogger.addContent(this.$.lettercontent.getValue());
+    //this.$.mylogger.addContent(this.$.lettercontent.getValue());
     this.$.pdfform.destroyComponents();
     for (i in this.tokens) {
       var type;
