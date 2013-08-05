@@ -3,10 +3,12 @@ enyo.kind({
   kind: "enyo.Control",
   classes: "token",
   topToken: true,
+  subToken: false,
   multiline: false,
   published: {
     description: "",
-    key: ""
+    key: "",
+    subkey: ""
   },
   events: {
     onNewToken: ""
@@ -14,7 +16,11 @@ enyo.kind({
   create: function(args) {
     this.inherited(arguments);
     this.$.descr.setContent(this.getDescription() + ":");
-    if (this.topToken) {
+    if (this.topToken && !this.subToken) {
+      this.doNewToken();
+    }
+    if (this.subToken) {
+      this.setKey(this.owner.getKey() + "-" + this.getSubkey());
       this.doNewToken();
     }
   },
