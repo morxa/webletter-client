@@ -1,6 +1,4 @@
-bootplate
+webletter-client
 =========
 
-Application template for packaged Enyo
-
-Refer to the [Wiki](https://github.com/enyojs/enyo/wiki/Bootplate) for how to get started.
+This is a submodule of Webletter. Please refer to [Webletter](https://github.com/morxa/webletter) for how to get started.
