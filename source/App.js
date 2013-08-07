@@ -21,7 +21,7 @@ enyo.kind({
           {kind: "WebLetter.TextToken", key: "closing", description: "Closing"}
           ]
         },
-        {tag: "form", name: "pdfform", attributes: {action: "http://localhost/webletter/server/letter.php"}, showing: false},
+        {tag: "form", name: "pdfform", attributes: {action: "http://localhost/webletter/server/letter.php", method: "post"}, showing: false},
           {kind: "onyx.Button", name: "go", content: "Generate PDF", ontap: "go"}
         ]
       }
