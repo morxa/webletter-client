@@ -5,6 +5,8 @@ enyo.kind({
   topToken: true,
   subToken: false,
   multiline: false,
+  isOptional: false,
+  isEnabled: true,
   published: {
     description: "",
     key: "",
@@ -15,13 +17,24 @@ enyo.kind({
   },
   create: function(args) {
     this.inherited(arguments);
-    this.$.descr.setContent(this.getDescription() + ":");
-    if (this.topToken && !this.subToken) {
-      this.doNewToken();
+    if (this.isOptional) {
+      this.createComponent({
+        name: "toggle",
+        kind: "onyx.ToggleButton",
+        onContent: "on",
+        offContent: "off",
+        value: this.$.isEnabled
+      });
     }
-    if (this.subToken) {
-      this.setKey(this.owner.getKey() + "-" + this.getSubkey());
-      this.doNewToken();
+    this.$.descr.setContent(this.getDescription() + ":");
+    if (this.isEnabled) {
+      if (this.topToken && !this.subToken) {
+        this.doNewToken();
+      }
+      if (this.subToken) {
+        this.setKey(this.owner.getKey() + "-" + this.getSubkey());
+        this.doNewToken();
+      }
     }
   },
   getInput: function() {
