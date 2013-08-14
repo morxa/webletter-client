@@ -24,9 +24,9 @@ enyo.kind({
         kind: "onyx.ToggleButton",
         onContent: "on",
         offContent: "off",
-        value: this.$.isEnabled
         onChange: "buttonToggle"
       });
+      this.$.toggle.setValue(this.isEnabled);
     }
     this.$.descr.setContent(this.getDescription() + ":");
     if (this.isEnabled) {
