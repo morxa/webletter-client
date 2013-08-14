@@ -15,8 +15,8 @@ enyo.kind({
           {kind: "WebLetter.BooleanToken", key: "togglefromlogo", description: "Logo"}
           ]
         },
-        {kind: "WebLetter.AddressToken", name: "addresser", description: "Addresser", key: "addresser"},
-        {kind: "WebLetter.AddressToken", name: "addressee", description: "Addressee", key: "addressee"},
+        {kind: "WebLetter.AddressToken", name: "addresser", description: "Addresser", key: "from"},
+        {kind: "WebLetter.AddressToken", name: "addressee", description: "Addressee", key: "to"},
         {kind: "onyx.Groupbox", name: "contentGroup", components: [
           {kind: "WebLetter.TextToken", description: "Subject", key: "subject", isOptional: true},
           {kind: "WebLetter.TextToken", description: "Opening", key: "opening"},
