@@ -10,7 +10,9 @@ enyo.kind({
       //{name: "mylogger", content: "log", allowHtml: true},
 			{name: "main", classes: "nice-padding", allowHtml: true, components: [
         {kind: "onyx.Groupbox", name: "settings", components: [
-          {kind: "WebLetter.BooleanToken", key: "folding", description: "folding marks"}
+          {kind: "WebLetter.BooleanToken", key: "folding", description: "Folding Marks"},
+          {kind: "WebLetter.BooleanToken", key: "togglefromphone", description: "Phone"},
+          {kind: "WebLetter.BooleanToken", key: "togglefromlogo", description: "Logo"}
           ]
         },
         {kind: "WebLetter.AddressToken", name: "addresser", description: "Addresser", key: "addresser"},
