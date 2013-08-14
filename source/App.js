@@ -32,10 +32,14 @@ enyo.kind({
     this.$.tokens = new Array();
   },
   handlers: {
-    onNewToken: "registerToken"
+    onNewToken: "registerToken",
+    onDisableToken: "deregisterToken"
   },
   registerToken: function(inSender, inEvent) {
     this.tokens.push(inEvent.originator);
+  },
+  deregisterToken: function(inSender, inEvent) {
+    this.tokens.splice(this.tokens.indexOf(inEvent.originator), 1);
   },
   go: function() {
     //this.$.mylogger.addContent(this.$.lettercontent.getValue());

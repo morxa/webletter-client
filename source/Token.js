@@ -13,7 +13,8 @@ enyo.kind({
     subkey: ""
   },
   events: {
-    onNewToken: ""
+    onNewToken: "",
+    onDisableToken: ""
   },
   create: function(args) {
     this.inherited(arguments);
@@ -24,6 +25,7 @@ enyo.kind({
         onContent: "on",
         offContent: "off",
         value: this.$.isEnabled
+        onChange: "buttonToggle"
       });
     }
     this.$.descr.setContent(this.getDescription() + ":");
@@ -39,6 +41,23 @@ enyo.kind({
   },
   getInput: function() {
     return this.$.input.getValue();
+  },
+  buttonToggle: function(inSender, inEvent) {
+    if (this.$.toggle.getValue()) {
+      this.$.isEnabled = true;
+      this.enableInputs();
+      this.doNewToken();
+    }
+    else {
+      this.$.isEnabled = false;
+      this.disableInputs();
+      this.doDisableToken();
+    }
+  },
+  enableInputs: function() {
+    this.$.input.setDisabled(false);
+  },
+  disableInputs: function() {
+    this.$.input.setDisabled(true);
   }
-
 });
