@@ -3,7 +3,6 @@ enyo.kind({
 	kind: "FittableRows",
 	fit: true,
   tokens: [],
-  scripturl: "http://localhost/webletter/server/letter.php",
 	components:[
 		{kind: "onyx.Toolbar", content: "WebLetter"},
 		{kind: "enyo.Scroller", fit: true,
@@ -25,7 +24,7 @@ enyo.kind({
           {kind: "WebLetter.TextToken", key: "closing", description: "Closing"}
           ]
         },
-        {tag: "form", name: "pdfform", attributes: {action: this.$.scripturl, method: "post"}, showing: false},
+        {tag: "form", name: "pdfform", attributes: {action: "http://localhost/webletter/server/letter.php", method: "post"}, showing: false},
           {kind: "onyx.Button", name: "go", content: "Generate PDF", ontap: "go"}
         ]
       }
