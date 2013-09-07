@@ -42,7 +42,11 @@ enyo.kind({
     this.tokens.push(inEvent.originator);
   },
   deregisterToken: function(inSender, inEvent) {
-    this.tokens.splice(this.tokens.indexOf(inEvent.originator), 1);
+    var index = this.tokens.indexOf(inEvent.originator);
+    while (index != -1) {
+      this.tokens.splice(index, 1);
+      index = this.tokens.indexOf(inEvent.originator);
+    }
   },
   go: function() {
     //this.$.mylogger.addContent(this.$.lettercontent.getValue());
