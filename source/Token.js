@@ -30,13 +30,10 @@ enyo.kind({
     }
     this.$.descr.setContent(this.getDescription() + ":");
     if (this.isEnabled) {
-      if (this.topToken && !this.subToken) {
-        this.doNewToken();
-      }
       if (this.subToken) {
         this.setKey(this.owner.getKey() + "-" + this.getSubkey());
-        this.doNewToken();
       }
+      this.doNewToken();
     }
   },
   getInput: function() {
