@@ -62,7 +62,9 @@ enyo.kind({
         type = "input";
         value = this.tokens[i].getInput();
       }
-      this.$.pdfform.createComponent({tag: type, attributes: {name: this.tokens[i].key, value: value}, content: content});
+      var keyprefix = "token-";
+      var key = keyprefix + this.tokens[i].key;
+      this.$.pdfform.createComponent({tag: type, attributes: {name: key, value: value}, content: content});
     }
     this.$.pdfform.render();
     document.getElementById(this.$.pdfform.getAttribute("id")).submit();
