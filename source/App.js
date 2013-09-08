@@ -52,6 +52,13 @@ enyo.kind({
     //this.$.mylogger.addContent(this.$.lettercontent.getValue());
     this.$.pdfform.destroyComponents();
     for (i in this.tokens) {
+      // add opt-token if the token is optional
+      // note that only active tokens are in the token array,
+      // thus we don't need to check if the token is enabled (it always is)
+      if (this.tokens[i].isOptional) {
+        var key = "%opt-token-" + this.tokens[i].key;
+        this.$.pdfform.createComponent({tag: "input", attributes: {name: key, value: ""}});
+      }
       var type;
       var content = "";
       var value = "";
