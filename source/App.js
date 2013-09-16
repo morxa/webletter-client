@@ -40,6 +40,7 @@ enyo.kind({
   },
   registerToken: function(inSender, inEvent) {
     this.tokens.push(inEvent.originator);
+    return true;
   },
   deregisterToken: function(inSender, inEvent) {
     var index = this.tokens.indexOf(inEvent.originator);
@@ -47,6 +48,7 @@ enyo.kind({
       this.tokens.splice(index, 1);
       index = this.tokens.indexOf(inEvent.originator);
     }
+    return true;
   },
   go: function() {
     //this.$.mylogger.addContent(this.$.lettercontent.getValue());
