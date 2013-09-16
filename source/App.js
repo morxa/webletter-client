@@ -31,8 +31,8 @@ enyo.kind({
 		]}
 	],
   create: function() {
+    this.tokens = new Array();
     this.inherited(arguments);
-    this.$.tokens = new Array();
   },
   handlers: {
     onNewToken: "registerToken",
