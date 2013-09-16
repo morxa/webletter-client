@@ -4,6 +4,7 @@ enyo.kind({
   classes: "token",
   topToken: true,
   subToken: false,
+  subtokens: [], // subtokens
   multiline: false,
   isOptional: false,
   isEnabled: true,
@@ -17,6 +18,7 @@ enyo.kind({
     onDisableToken: ""
   },
   create: function(args) {
+    this.subtokens = new Array();
     this.inherited(arguments);
     if (this.isOptional) {
       this.createComponent({
@@ -31,6 +33,7 @@ enyo.kind({
     this.$.descr.setContent(this.getDescription() + ":");
     if (this.subToken) {
       this.setKey(this.owner.getKey() + "-" + this.getSubkey());
+      this.owner.addSubToken(this);
     }
     this.doNewToken();
   },
@@ -58,5 +61,9 @@ enyo.kind({
   },
   disableInputs: function() {
     this.$.input.setDisabled(true);
+  },
+  addSubToken: function(token) {
+    enyo.log(this.name + ": add token " + token.name);
+    this.subtokens.push(token);
   }
 });
