@@ -60,19 +60,21 @@ enyo.kind({
           var key = "%opt-token-" + this.tokens[i].key;
           this.$.pdfform.createComponent({tag: "input", attributes: {name: key, value: ""}});
         }
-        var type;
-        var content = "";
-        var value = "";
-        if (this.tokens[i].multiline) {
-          type = "textarea";
-          content = this.tokens[i].getInput();
-        } else {
-          type = "input";
-          value = this.tokens[i].getInput();
+        if (this.tokens[i].topToken) {
+          var type;
+          var content = "";
+          var value = "";
+          if (this.tokens[i].multiline) {
+            type = "textarea";
+            content = this.tokens[i].getInput();
+          } else {
+            type = "input";
+            value = this.tokens[i].getInput();
+          }
+          var keyprefix = "token-";
+          var key = keyprefix + this.tokens[i].key;
+          this.$.pdfform.createComponent({tag: type, attributes: {name: key, value: value}, content: content});
         }
-        var keyprefix = "token-";
-        var key = keyprefix + this.tokens[i].key;
-        this.$.pdfform.createComponent({tag: type, attributes: {name: key, value: value}, content: content});
       }
       else { // !this.tokens[i].isEnabled
         // only add the nopt token
