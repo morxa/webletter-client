@@ -22,7 +22,9 @@ enyo.kind({
     return res;
   },
   enableInputs: function() { },
-  disableInputs: function() { }
+  disableInputs: function() { },
+  saveData: function() { },
+  loadData: function() { }
 });
     
 
