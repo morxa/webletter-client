@@ -8,6 +8,7 @@ enyo.kind({
   multiline: false,
   isOptional: false,
   isEnabled: true,
+  saveable: false,
   published: {
     description: "",
     key: "",
@@ -30,6 +31,20 @@ enyo.kind({
       });
       this.$.toggle.value = this.isEnabled;
     }
+    if (this.saveable) {
+      this.createComponent({
+        name: "saveButton",
+        kind: "onyx.Button",
+        content: "Save",
+        ontap: "saveAllData"
+      });
+      this.createComponent({
+        name: "loadButton",
+        kind: "onyx.Button",
+        content: "Load",
+        ontap: "loadAllData"
+      });
+    }
     this.$.descr.setContent(this.getDescription() + ":");
     if (this.subToken) {
       this.setKey(this.owner.getKey() + "-" + this.getSubkey());
@@ -50,6 +65,25 @@ enyo.kind({
     else {
       this.disableToken();
     }
+  },
+  saveAllData: function(inSender, inEvent) {
+    this.saveData();
+    for (i in this.subtokens) {
+      this.subtokens[i].saveAllData();
+    }
+  },
+  saveData: function() {
+    enyo.log("saving: " + this.key + "=" + this.getInput());
+    LocalStorage.set(this.key, this.getInput());
+  },
+  loadAllData: function(inSender, inEvent) {
+    this.loadData();
+    for (i in this.subtokens) {
+      this.subtokens[i].loadAllData();
+    }
+  },
+  loadData: function() {
+    this.setInput(LocalStorage.get(this.key));
   },
   enableToken: function() {
     this.isEnabled = true;
