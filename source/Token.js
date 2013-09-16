@@ -50,6 +50,9 @@ enyo.kind({
   },
   enableToken: function() {
     this.isEnabled = true;
+    if (this.isOptional) {
+      this.$.toggle.setValue(true);
+    }
     this.enableInputs();
     for (i in this.subtokens) {
      this.subtokens[i].enableToken();
@@ -57,6 +60,9 @@ enyo.kind({
   },
   disableToken: function() {
     this.isEnabled = false;
+    if (this.isOptional) {
+      this.$.toggle.setValue(false);
+    }
     this.disableInputs();
     for (i in this.subtokens) {
      this.subtokens[i].disableToken();
