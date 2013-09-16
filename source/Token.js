@@ -39,13 +39,19 @@ enyo.kind({
   },
   buttonToggle: function(inSender, inEvent) {
     if (this.$.toggle.getValue()) {
-      this.isEnabled = true;
-      this.enableInputs();
+      this.enableToken();
     }
     else {
-      this.isEnabled = false;
-      this.disableInputs();
+      this.disableToken();
     }
+  },
+  enableToken: function() {
+    this.isEnabled = true;
+    this.enableInputs();
+  },
+  disableToken: function() {
+    this.isEnabled = false;
+    this.disableInputs();
   },
   enableInputs: function() {
     this.$.input.setDisabled(false);
