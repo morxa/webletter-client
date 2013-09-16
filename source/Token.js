@@ -51,10 +51,16 @@ enyo.kind({
   enableToken: function() {
     this.isEnabled = true;
     this.enableInputs();
+    for (i in this.subtokens) {
+     this.subtokens[i].enableToken();
+    }
   },
   disableToken: function() {
     this.isEnabled = false;
     this.disableInputs();
+    for (i in this.subtokens) {
+     this.subtokens[i].disableToken();
+    }
   },
   enableInputs: function() {
     this.$.input.setDisabled(false);
