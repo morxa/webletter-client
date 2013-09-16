@@ -40,6 +40,9 @@ enyo.kind({
   getInput: function() {
     return this.$.input.getValue();
   },
+  setInput: function(value) {
+    this.$.input.setValue(value);
+  },
   buttonToggle: function(inSender, inEvent) {
     if (this.$.toggle.getValue()) {
       this.enableToken();
