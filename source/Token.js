@@ -29,12 +29,10 @@ enyo.kind({
       this.$.toggle.value = this.isEnabled;
     }
     this.$.descr.setContent(this.getDescription() + ":");
-    if (this.isEnabled) {
-      if (this.subToken) {
-        this.setKey(this.owner.getKey() + "-" + this.getSubkey());
-      }
-      this.doNewToken();
+    if (this.subToken) {
+      this.setKey(this.owner.getKey() + "-" + this.getSubkey());
     }
+    this.doNewToken();
   },
   getInput: function() {
     return this.$.input.getValue();
@@ -43,12 +41,10 @@ enyo.kind({
     if (this.$.toggle.getValue()) {
       this.isEnabled = true;
       this.enableInputs();
-      this.doNewToken();
     }
     else {
       this.isEnabled = false;
       this.disableInputs();
-      this.doDisableToken();
     }
   },
   enableInputs: function() {

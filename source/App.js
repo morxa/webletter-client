@@ -52,26 +52,33 @@ enyo.kind({
     //this.$.mylogger.addContent(this.$.lettercontent.getValue());
     this.$.pdfform.destroyComponents();
     for (i in this.tokens) {
-      // add opt-token if the token is optional
-      // note that only active tokens are in the token array,
-      // thus we don't need to check if the token is enabled (it always is)
-      if (this.tokens[i].isOptional) {
-        var key = "%opt-token-" + this.tokens[i].key;
-        this.$.pdfform.createComponent({tag: "input", attributes: {name: key, value: ""}});
+      if (this.tokens[i].isEnabled) {
+        // add opt-token if the token is optional
+        if (this.tokens[i].isOptional) {
+          var key = "%opt-token-" + this.tokens[i].key;
+          this.$.pdfform.createComponent({tag: "input", attributes: {name: key, value: ""}});
+        }
+        var type;
+        var content = "";
+        var value = "";
+        if (this.tokens[i].multiline) {
+          type = "textarea";
+          content = this.tokens[i].getInput();
+        } else {
+          type = "input";
+          value = this.tokens[i].getInput();
+        }
+        var keyprefix = "token-";
+        var key = keyprefix + this.tokens[i].key;
+        this.$.pdfform.createComponent({tag: type, attributes: {name: key, value: value}, content: content});
       }
-      var type;
-      var content = "";
-      var value = "";
-      if (this.tokens[i].multiline) {
-        type = "textarea";
-        content = this.tokens[i].getInput();
-      } else {
-        type = "input";
-        value = this.tokens[i].getInput();
+      else { // !this.tokens[i].isEnabled
+        // only add the nopt token
+        if (this.tokens[i].isOptional) {
+          var key = "%nopt-token-" + this.tokens[i].key;
+          this.$.pdfform.createComponent({tag: "input", attributes: {name: key, value: ""}});
+        }
       }
-      var keyprefix = "token-";
-      var key = keyprefix + this.tokens[i].key;
-      this.$.pdfform.createComponent({tag: type, attributes: {name: key, value: value}, content: content});
     }
     this.$.pdfform.render();
     document.getElementById(this.$.pdfform.getAttribute("id")).submit();
