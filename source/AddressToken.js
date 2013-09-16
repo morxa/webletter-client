@@ -20,7 +20,9 @@ enyo.kind({
     + " "
     + this.$.city.getValue();
     return res;
-  }
+  },
+  enableInputs: function() { },
+  disableInputs: function() { }
 });
     
 
