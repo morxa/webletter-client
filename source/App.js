@@ -7,7 +7,6 @@ enyo.kind({
 		{kind: "onyx.Toolbar", content: "WebLetter"},
 		{kind: "enyo.Scroller", fit: true,
       components: [
-      //{name: "mylogger", content: "log", allowHtml: true},
 			{name: "main", classes: "nice-padding", allowHtml: true, components: [
         {kind: "onyx.Groupbox", name: "settings", components: [
           {kind: "WebLetter.BooleanToken", key: "folding", description: "Folding Marks"},
