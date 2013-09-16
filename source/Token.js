@@ -41,12 +41,12 @@ enyo.kind({
   },
   buttonToggle: function(inSender, inEvent) {
     if (this.$.toggle.getValue()) {
-      this.$.isEnabled = true;
+      this.isEnabled = true;
       this.enableInputs();
       this.doNewToken();
     }
     else {
-      this.$.isEnabled = false;
+      this.isEnabled = false;
       this.disableInputs();
       this.doDisableToken();
     }
