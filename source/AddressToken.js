@@ -3,11 +3,13 @@ enyo.kind({
   kind: "WebLetter.Token",
   style: "margin: 0px; padding: 0px;",
   topToken: false,
+  isOptional: true,
+  saveable: true,
   components: [
     {kind: "onyx.Groupbox", components: [
       {kind: "onyx.GroupboxHeader", name: "descr"},
       {kind: "WebLetter.TextToken", name: "name", description: "Name", subkey: "name", subToken: true},
-      {kind: "WebLetter.TextToken", name: "street", description: "Street", subkey: "street", subToken: true},
+      {kind: "WebLetter.TextToken", name: "street", description: "Street", subkey: "street", subToken: true, isOptional: true},
       {kind: "WebLetter.TextToken", name: "zip", description: "ZIP Code", subkey: "zip", subToken: true},
       {kind: "WebLetter.TextToken", name: "city", description: "City", subkey: "city", subToken: true}
     ]}],
