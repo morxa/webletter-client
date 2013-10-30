@@ -4,6 +4,7 @@ enyo.kind({
 	fit: true,
   tokens: [],
 	components:[
+    {kind: WebLetter.Config, name: "config"},
 		{kind: "onyx.Toolbar", content: "WebLetter"},
 		{kind: "enyo.Scroller", fit: true,
       components: [
@@ -23,7 +24,7 @@ enyo.kind({
           {kind: "WebLetter.TextToken", key: "closing", description: "Closing"}
           ]
         },
-        {tag: "form", name: "pdfform", attributes: {action: "http://localhost/webletter/server/letter.php", method: "post"}, showing: false},
+        {tag: "form", name: "pdfform", showing: false},
           {kind: "onyx.Button", name: "go", content: "Generate PDF", ontap: "go"}
         ]
       }
@@ -32,6 +33,9 @@ enyo.kind({
   create: function() {
     this.tokens = new Array();
     this.inherited(arguments);
+    // set up form
+    this.$.pdfform.attributes.method=this.$.config.getMethod();
+    this.$.pdfform.attributes.action=this.$.config.getServerUrl();
   },
   handlers: {
     onNewToken: "registerToken",
