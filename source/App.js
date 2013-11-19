@@ -46,11 +46,8 @@ enyo.kind({
     return true;
   },
   deregisterToken: function(inSender, inEvent) {
-    var index = this.tokens.indexOf(inEvent.originator);
-    while (index != -1) {
-      this.tokens.splice(index, 1);
-      index = this.tokens.indexOf(inEvent.originator);
-    }
+    // do nothing since disabled tokens might be optional and
+    // need the %nopt-token to be replaced
     return true;
   },
   go: function() {
