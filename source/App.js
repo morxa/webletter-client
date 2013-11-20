@@ -11,8 +11,8 @@ enyo.kind({
 			{name: "main", classes: "nice-padding", allowHtml: true, components: [
         {kind: "onyx.Groupbox", name: "settings", components: [
           {kind: "WebLetter.BooleanToken", key: "folding", description: "Folding Marks"},
-          {kind: "WebLetter.BooleanToken", key: "footer", description: "Footer", isOptional: true},
-          {kind: "WebLetter.BooleanToken", key: "togglefromlogo", description: "Logo"}
+          {kind: "WebLetter.BooleanToken", key: "footer", description: "Footer"},
+          {kind: "WebLetter.BooleanToken", key: "logo", description: "Logo"}
           ]
         },
         {kind: "WebLetter.AddressToken", name: "addresser", description: "Addresser", key: "from"},
