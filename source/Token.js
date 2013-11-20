@@ -47,7 +47,7 @@ enyo.kind({
     }
     this.$.descr.setContent(this.getDescription() + ":");
     if (this.subToken) {
-      this.setKey(this.owner.getKey() + "-" + this.getSubkey());
+      this.setKey(this.owner.getKey() + this.getSubkey());
       this.owner.addSubToken(this);
     }
     this.doNewToken();

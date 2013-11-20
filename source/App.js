@@ -57,7 +57,7 @@ enyo.kind({
       if (this.tokens[i].isEnabled) {
         // add opt-token if the token is optional
         if (this.tokens[i].isOptional) {
-          var key = "%opt-token-" + this.tokens[i].key;
+          var key = "%opt-" + this.tokens[i].key;
           this.$.pdfform.createComponent({tag: "input", attributes: {name: key, value: ""}});
         }
         if (this.tokens[i].topToken) {
@@ -79,7 +79,7 @@ enyo.kind({
       else { // !this.tokens[i].isEnabled
         // only add the nopt token
         if (this.tokens[i].isOptional) {
-          var key = "%nopt-token-" + this.tokens[i].key;
+          var key = "%nopt-" + this.tokens[i].key;
           this.$.pdfform.createComponent({tag: "input", attributes: {name: key, value: ""}});
         }
       }
