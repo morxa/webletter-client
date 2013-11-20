@@ -106,10 +106,14 @@ enyo.kind({
     }
   },
   enableInputs: function() {
-    this.$.input.setDisabled(false);
+    if (this.$.input) {
+      this.$.input.setDisabled(false);
+    }
   },
   disableInputs: function() {
-    this.$.input.setDisabled(true);
+    if (this.$.input) {
+      this.$.input.setDisabled(true);
+    }
   },
   addSubToken: function(token) {
     enyo.log(this.name + ": add token " + token.name);
