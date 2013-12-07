@@ -2,6 +2,7 @@ enyo.kind({
   name: "WebLetter.Config",
   published: {
     serverUrl: "http://localhost/webletter/server/letter.php",
-    method: "post"
+    method: "post",
+    debugging: true
   }
 });

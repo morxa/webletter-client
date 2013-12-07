@@ -85,7 +85,16 @@ enyo.kind({
       }
     }
     this.$.pdfform.render();
-    document.getElementById(this.$.pdfform.getAttribute("id")).submit();
+    if (this.$.config.getDebugging()) {
+      var components = this.$.pdfform.getComponents();
+      for (i in components) {
+        var attrs = components[i].attributes;
+        enyo.log("'" + attrs.name + "': '" + attrs.value + "'");
+      }
+    }
+    else {
+      document.getElementById(this.$.pdfform.getAttribute("id")).submit();
+    }
   }
 
 });
