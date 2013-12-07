@@ -20,7 +20,7 @@ enyo.kind({
         {kind: "onyx.Groupbox", name: "contentGroup", components: [
           {kind: "WebLetter.TextToken", description: "Subject", key: "subject", isOptional: true},
           {kind: "WebLetter.TextToken", description: "Opening", key: "opening"},
-          {kind: "WebLetter.TextAreaToken", name: "lettercontent", allowHtml: true, key: "content", description: "Content", inputWidth: "800px", inputHeight: "400px"},
+          {kind: "WebLetter.TextAreaToken", name: "lettercontent", allowHtml: true, key: "content", description: "Content", inputWidth: "100%", inputHeight: "400px"},
           {kind: "WebLetter.TextToken", key: "closing", description: "Closing"}
           ]
         },
