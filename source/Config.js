@@ -3,6 +3,6 @@ enyo.kind({
   published: {
     serverUrl: "http://localhost/webletter/server/letter.php",
     method: "post",
-    debugging: true
+    debugging: false
   }
 });
