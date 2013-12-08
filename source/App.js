@@ -5,7 +5,14 @@ enyo.kind({
   tokens: [],
 	components:[
     {kind: WebLetter.Config, name: "config"},
-		{kind: "onyx.Toolbar", content: "WebLetter"},
+		{
+      kind: "onyx.Toolbar",
+      layoutKind: "FittableColumnsLayout",
+      components: [
+        {content: "WebLetter"},
+        {fit: true},
+        {kind: "onyx.Button", name: "clear", content: "Clear Form", ontap: "clearForm"}
+    ]},
 		{kind: "enyo.Scroller", fit: true,
       components: [
 			{name: "main", classes: "nice-padding", allowHtml: true, components: [
@@ -99,6 +106,11 @@ enyo.kind({
     }
     else {
       document.getElementById(this.$.pdfform.getAttribute("id")).submit();
+    }
+  },
+  clearForm: function() {
+    for (i in this.tokens) {
+      this.tokens[i].clear();
     }
   }
 
