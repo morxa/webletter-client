@@ -56,13 +56,19 @@ enyo.kind({
       this.setKey(this.owner.getKey() + this.getSubkey());
       this.owner.addSubToken(this);
     }
+    this.loadData("autosave-");
     this.doNewToken();
   },
   getInput: function() {
     return this.$.input.getValue();
   },
   setInput: function(value) {
-    this.$.input.setValue(value);
+    if (this.$.input) {
+      this.$.input.setValue(value);
+    }
+    else {
+      enyo.log("component " + this.name + " has no component input");
+    }
   },
   buttonToggle: function(inSender, inEvent) {
     if (this.$.toggle.getValue()) {
@@ -95,8 +101,12 @@ enyo.kind({
       this.subtokens[i].loadAllData();
     }
   },
-  loadData: function() {
-    this.setInput(LocalStorage.get(this.key));
+  loadData: function(prefix) {
+    if (!prefix) {
+      prefix = "";
+    }
+    enyo.log("loading: " + prefix + this.key);
+    this.setInput(LocalStorage.get(prefix + this.key));
   },
   enableToken: function() {
     this.isEnabled = true;
