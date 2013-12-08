@@ -73,14 +73,21 @@ enyo.kind({
     }
   },
   saveAllData: function(inSender, inEvent) {
-    this.saveData();
+    this.saveData(inEvent);
     for (i in this.subtokens) {
       this.subtokens[i].saveAllData(inSender, inEvent);
     }
   },
-  saveData: function() {
-    enyo.log("saving: " + this.key + "=" + this.getInput());
-    LocalStorage.set(this.key, this.getInput());
+  saveData: function(inEvent) {
+    if (inEvent == "autosave") {
+      enyo.log("autosaving");
+      prefix = "autosave-";
+    }
+    else {
+      prefix = "";
+    }
+    enyo.log("saving: " + prefix + this.key + "=" + this.getInput());
+    LocalStorage.set(prefix + this.key, this.getInput());
   },
   loadAllData: function(inSender, inEvent) {
     this.loadData();
