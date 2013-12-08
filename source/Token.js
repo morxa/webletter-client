@@ -30,6 +30,12 @@ enyo.kind({
         onChange: "buttonToggle"
       });
       this.$.toggle.value = this.isEnabled;
+      if (this.isEnabled) {
+        this.enableToken();
+      }
+      else {
+        this.disableToken();
+      }
     }
     if (this.saveable) {
       this.createComponent({
