@@ -141,5 +141,11 @@ enyo.kind({
   addSubToken: function(token) {
     enyo.log(this.name + ": add token " + token.name);
     this.subtokens.push(token);
+  },
+  clear: function() {
+    this.setInput("");
+    for (i in this.subtokens) {
+      this.subtokens[i].clear();
+    }
   }
 });
