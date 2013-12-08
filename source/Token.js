@@ -75,7 +75,7 @@ enyo.kind({
   saveAllData: function(inSender, inEvent) {
     this.saveData();
     for (i in this.subtokens) {
-      this.subtokens[i].saveAllData();
+      this.subtokens[i].saveAllData(inSender, inEvent);
     }
   },
   saveData: function() {
