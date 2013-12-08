@@ -22,7 +22,8 @@ enyo.kind({
         enyo.log("OBJECT: " + result);
         throw "ERROR [Storage.get]: getItem returned an object. Should be a string.";
       } else if(typeof result === "undefined" || result === null){
-        throw "ERROR: [Storage.get]: getItem returned a falsey value. Should be a string.";
+        enyo.log("object " + name + "doesn't exist.");
+        return "";
       }
 
     },
