@@ -57,6 +57,8 @@ enyo.kind({
     //this.$.mylogger.addContent(this.$.lettercontent.getValue());
     this.$.pdfform.destroyComponents();
     for (i in this.tokens) {
+      // autosave
+      this.tokens[i].saveAllData(this, "autosave");
       if (this.tokens[i].isEnabled) {
         // add opt-token if the token is optional
         if (this.tokens[i].isOptional) {
