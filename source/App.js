@@ -22,7 +22,7 @@ enyo.kind({
           {kind: "WebLetter.TextToken", description: "Opening", key: "opening"},
           {kind: "WebLetter.TextAreaToken", name: "lettercontent", allowHtml: true, key: "content", description: "Content", inputWidth: "100%", inputHeight: "400px"},
           {kind: "WebLetter.TextToken", key: "closing", description: "Closing"},
-          {kind: "WebLetter.TextToken", key: "signatureaddition", description: "Signature Addition", isOptional: true}
+          {kind: "WebLetter.TextToken", key: "signatureaddition", description: "Signature Addition", isOptional: true, isEnabled: false}
           ]
         },
         {tag: "form", name: "pdfform", showing: false},
