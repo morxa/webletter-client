@@ -3,6 +3,7 @@ enyo.kind({
 	kind: "FittableRows",
 	fit: true,
   tokens: [],
+  lastGroupID: 1,
 	components:[
     {kind: WebLetter.Config, name: "config"},
 		{
@@ -23,8 +24,12 @@ enyo.kind({
           ]
         },
         {kind: "WebLetter.AddressToken", name: "addresser", description: "Addresser", key: "from"},
-        {kind: "WebLetter.AddressToken", name: "addressee", description: "Addressee", key: "to"},
-        {kind: "onyx.Groupbox", name: "contentGroup", components: [
+        {kind: "onyx.Groupbox", name: "addressees", components: [
+          {kind: "WebLetter.AddressToken", name: "addressee1", description: "Addressee 1", key: "to", isStatic: false, groupID: 1}
+          ]
+        },
+        {kind: "onyx.Button", name: "newAdressee", content: "Add Addressee", ontap: "addAddressee"},
+          {kind: "onyx.Groupbox", name: "contentGroup", components: [
           {kind: "WebLetter.TextToken", description: "Subject", key: "subject", isOptional: true},
           {kind: "WebLetter.TextToken", description: "Opening", key: "opening"},
           {kind: "WebLetter.TextAreaToken", name: "lettercontent", allowHtml: true, key: "content", description: "Content", inputWidth: "100%", inputHeight: "400px"},
@@ -80,34 +85,41 @@ enyo.kind({
     this.$.pdfform.destroyComponents();
     // JSON request
     var request = new Object();
-    // support multiple letters in one request
-    var letter = new Object();
-    request.letters = new Array();
-    request.letters[0] = letter;
-    letter.tokens = new Array();
+    request.tokens = new Array();
 
     //autosave
     for (i in this.tokens) {
       this.tokens[i].saveAllData(this, "autosave");
     }
 
-    letter.tokens = this.tokens;
+    request.tokens = this.tokens;
     this.$.pdfform.createComponent({tag: "input", attributes: {name: "q", value: JSON.stringify(request)}});
     this.$.pdfform.render();
     if (this.$.config.getDebugging()) {
-      var components = this.$.pdfform.getComponents();
-      for (i in components) {
-        var attrs = components[i].attributes;
-        enyo.log("'" + attrs.name + "': '" + attrs.value + "'");
-      }
-      //enyo.log("Stringify all tokens: " + JSON.stringify(this.tokens));
-      //enyo.log("Stringify letter: " + JSON.stringify(letter));
-      //enyo.log("Stringify request: " + JSON.stringify(request));
-      //this.sendJSONRequest(JSON.stringify(request));
+      enyo.log("Stringify request: " + JSON.stringify(request));
     }
     else {
       document.getElementById(this.$.pdfform.getAttribute("id")).submit();
     }
+  },
+  addAddressee: function() {
+    groupID = this.nextGroupID();
+    enyo.log("adding new addressee with group ID " + groupID);
+    this.$.addressees.createComponent(
+    {
+      kind: "WebLetter.AddressToken",
+      name: "addressee" + groupID,
+      description: "Addressee " + groupID,
+      key: "to",
+      isStatic: false,
+      groupID: groupID}
+      );
+    this.$.addressees.render();
+    return true;
+  },
+  nextGroupID: function() {
+    this.lastGroupID += 1;
+    return this.lastGroupID;
   },
   clearForm: function() {
     for (i in this.tokens) {

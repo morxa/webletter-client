@@ -9,6 +9,8 @@ enyo.kind({
   isOptional: false,
   isEnabled: true,
   saveable: false,
+  isStatic: true,
+  groupID: 0,
   published: {
     description: "",
     key: "",
@@ -54,6 +56,8 @@ enyo.kind({
     this.$.descr.setContent(this.getDescription() + ":");
     if (this.subToken) {
       this.setKey(this.owner.getKey() + this.getSubkey());
+      this.isStatic = this.owner.isStatic;
+      this.groupID = this.owner.groupID;
       this.owner.addSubToken(this);
     }
     this.loadData("autosave-");
@@ -92,8 +96,8 @@ enyo.kind({
     else {
       prefix = "";
     }
-    enyo.log("saving: " + prefix + this.key + "=" + this.getInput());
-    LocalStorage.set(prefix + this.key, this.getInput());
+    enyo.log("saving: " + prefix + this.key + this.groupID + "=" + this.getInput());
+    LocalStorage.set(prefix + this.key + this.groupID, this.getInput());
   },
   loadAllData: function(inSender, inEvent) {
     this.loadData();
@@ -105,8 +109,8 @@ enyo.kind({
     if (!prefix) {
       prefix = "";
     }
-    enyo.log("loading: " + prefix + this.key);
-    this.setInput(LocalStorage.get(prefix + this.key));
+    enyo.log("loading: " + prefix + this.key + this.groupID);
+    this.setInput(LocalStorage.get(prefix + this.key + this.groupID));
   },
   enableToken: function() {
     this.isEnabled = true;
@@ -149,6 +153,6 @@ enyo.kind({
     }
   },
   toJSON: function() {
-    return {key: this.getKey(), value: this.getInput(), isOptional: this.isOptional, isEnabled: this.isEnabled};
+    return {key: this.getKey(), value: this.getInput(), isOptional: this.isOptional, isEnabled: this.isEnabled, kind: this.kind, isStatic: this.isStatic, groupID: this.groupID};
   }
 });
