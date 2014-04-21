@@ -60,42 +60,39 @@ enyo.kind({
     // need the %nopt-token to be replaced
     return true;
   },
+  sendJSONRequest: function(request) {
+    var ajax = new enyo.Ajax({
+      url: this.$.config.getServerUrl(),
+      method: "GET",
+      contentType: "application/json"
+    });
+    ajax.go({
+      q: request
+    });
+    ajax.response(this, function(inSender, inResponse) {
+      enyo.log(inResponse);
+      //var blob = new Blob([inResponse], {type: "text/plain"});
+      //saveAs(blob, "letter.txt");
+    });
+  },
   go: function() {
     //this.$.mylogger.addContent(this.$.lettercontent.getValue());
     this.$.pdfform.destroyComponents();
+    // JSON request
+    var request = new Object();
+    // support multiple letters in one request
+    var letter = new Object();
+    request.letters = new Array();
+    request.letters[0] = letter;
+    letter.tokens = new Array();
+
+    //autosave
     for (i in this.tokens) {
-      // autosave
       this.tokens[i].saveAllData(this, "autosave");
-      if (this.tokens[i].isEnabled) {
-        // add opt-token if the token is optional
-        if (this.tokens[i].isOptional) {
-          var key = "%opt-" + this.tokens[i].key;
-          this.$.pdfform.createComponent({tag: "input", attributes: {name: key, value: ""}});
-        }
-        if (this.tokens[i].topToken) {
-          var type;
-          var content = "";
-          var value = "";
-          if (this.tokens[i].multiline) {
-            type = "textarea";
-            content = this.tokens[i].getInput();
-          } else {
-            type = "input";
-            value = this.tokens[i].getInput();
-          }
-          var keyprefix = "token-";
-          var key = keyprefix + this.tokens[i].key;
-          this.$.pdfform.createComponent({tag: type, attributes: {name: key, value: value}, content: content});
-        }
-      }
-      else { // !this.tokens[i].isEnabled
-        // only add the nopt token
-        if (this.tokens[i].isOptional) {
-          var key = "%nopt-" + this.tokens[i].key;
-          this.$.pdfform.createComponent({tag: "input", attributes: {name: key, value: ""}});
-        }
-      }
     }
+
+    letter.tokens = this.tokens;
+    this.$.pdfform.createComponent({tag: "input", attributes: {name: "q", value: JSON.stringify(request)}});
     this.$.pdfform.render();
     if (this.$.config.getDebugging()) {
       var components = this.$.pdfform.getComponents();
@@ -103,6 +100,10 @@ enyo.kind({
         var attrs = components[i].attributes;
         enyo.log("'" + attrs.name + "': '" + attrs.value + "'");
       }
+      //enyo.log("Stringify all tokens: " + JSON.stringify(this.tokens));
+      //enyo.log("Stringify letter: " + JSON.stringify(letter));
+      //enyo.log("Stringify request: " + JSON.stringify(request));
+      //this.sendJSONRequest(JSON.stringify(request));
     }
     else {
       document.getElementById(this.$.pdfform.getAttribute("id")).submit();
@@ -113,5 +114,4 @@ enyo.kind({
       this.tokens[i].clear();
     }
   }
-
 });

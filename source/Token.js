@@ -147,5 +147,8 @@ enyo.kind({
     for (i in this.subtokens) {
       this.subtokens[i].clear();
     }
+  },
+  toJSON: function() {
+    return {key: this.getKey(), value: this.getInput(), isOptional: this.isOptional, isEnabled: this.isEnabled};
   }
 });
